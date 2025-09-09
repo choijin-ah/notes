@@ -4,9 +4,7 @@ body{
 div{
   box-sizing: border-box;
 }
-div {
-  box-sizing : border-box
-}
+
 .list {
   text-align : left;
   padding-left : 20px;
