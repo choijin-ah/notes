@@ -78,7 +78,7 @@ function App() {
       {
         //4: 조건문
         ///조건식?참일때실행할코드:거짓일때실행할코드
-        modal==true?<Modal 글제목={글제목} 함수={()=>{
+        modal==true?<Modal 글제목={글제목} ModalTitle={modalTitle} 함수={()=>{
           let copy=[...글제목];
             //변경할 시 카피해서 사용하는 것이 현명한 방법
             copy[0]='여자코트추천';
@@ -97,7 +97,7 @@ function App() {
       <div className="modal">
         { console.log(props.ModalTitle)}
           <h4>{//props 는 부모>자식만 가능
-          props.ModalTitle}</h4>
+          props.글제목[props.ModalTitle]}</h4>
           <p>날짜</p>
           <p>상세내용</p>
           <button onClick={props.함수}>글수정</button>
