@@ -12,7 +12,7 @@ function App() {
   let post='강남우동맛집';
   //state 문법
   let [글제목,제목변경] =useState(['도현바보','바보2','강도현바보3']);
-  let [로고,로고설정] =useState('도현');
+  let [로고,로고설정] =useState('블로그');
   //a는 자료 이름, b는 변경을 도와주는 함수
   //변수 변경을 자동으로 (재렌더링)
   //사이트 로고/제목같은 건 하드코딩해도돼
@@ -21,7 +21,7 @@ function App() {
   //map자료 개수만큼 코드 실행해줌
   //함수의 파라미터는 array 안에 있던 자료
   //return에 뭐 적으면 array로 담아줌
-
+  let[입력값,입력값변경]=useState('');
 
 
   //모달창 state
@@ -64,17 +64,33 @@ function App() {
                     <h4 onClick={()=>{
                       setModalTitle(i);
                       setModal(!modal);
-                      }}>{글제목[i]} </h4>
-                    <span onClick={()=>{ 
+                      }}>{글제목[i]} <span onClick={(e)=>{ 
                       let goodCopy=[...따봉];
                       goodCopy[i]= goodCopy[i] +1;
                       따봉변경(goodCopy);
-                      }}>👍</span> {따봉[i]}
+                      //이벤트 버블링 삭제
+                      e.stopPropagation();
+                      }}>👍</span>{따봉[i]} <button onClick={()=>{
+                        let titleCopy=[...글제목];
+                        titleCopy.splice(i,1);
+                        제목변경(titleCopy)
+                      }}>글삭제</button></h4>
+                     
                     <p>2월 17일 발행</p>
                   </div>)}
         )
         }
-      
+      <input type="text" onChange={(e)=>{
+        //이벤트 핸들러는 많음
+        입력값변경(e.target.value);
+        console.log(e.target.value)}}></input>
+
+        <button onClick={()=>{
+          let titleCopy=[...글제목];
+          titleCopy.unshift(입력값);
+          제목변경(titleCopy)
+        }}>버튼</button>
+
       {
         //4: 조건문
         ///조건식?참일때실행할코드:거짓일때실행할코드
@@ -90,7 +106,7 @@ function App() {
 }
 
   function Modal(props){
-    //3강 분량 모달창
+    //3강 분량 모달창ㅐ
     //컴포넌트를 만드는 방법
     //리턴 안에는 하나의 태그로 감싸야 함 state 갖다쓸 때 문제가 생김
     return(
